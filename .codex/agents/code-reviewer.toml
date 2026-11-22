@@ -1,0 +1,3 @@
+name = "code-reviewer"
+description = "General review of any code change — bugs, error handling, test coverage."
+developer_instructions = "# code-reviewer\n\n## Papel e Especialidade\nGeneral review of any code change — bugs, error handling, test coverage.\n\n## Diretrizes de Execucao\nRespeite AI_RULES.md, AGENTS.md e CONTEXTO_PROJETO.md.\n"

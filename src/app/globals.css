@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* Estado de rolagem controlado por <ScrollState /> (atributo no <html>) */
+@custom-variant scrolled (&:where([data-scrolled] *));
+/* Telas baixas: celulares em paisagem */
+@custom-variant short (@media (max-height: 480px) and (orientation: landscape));
+
+/* =========================================================================
+   Morbius Kennel — preto, dourado e branco. Alto contraste, tipografia larga.
+   ========================================================================= */
+@theme {
+  --color-ink: #0e0e0d;
+  --color-ink-2: #171716;
+  --color-ink-3: #232321;
+  --color-gold: #d4a24c;
+  --color-gold-light: #e2b765;
+  --color-gold-deep: #a87a2a;
+  --color-paper: #f4f0e8;
+  --color-white: #ffffff;
+
+  /* texto sobre escuro */
+  --color-fg: #f7f4ee;
+  --color-fg-muted: #b6b1a7;
+  /* texto sobre claro/dourado */
+  --color-ink-muted: #55514a;
+
+  --color-line: rgb(255 255 255 / 0.12);
+  --color-line-ink: rgb(14 14 13 / 0.14);
+  --color-error: #ff9c86;
+
+  --font-sans: var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  --text-hero: clamp(2rem, 1.1rem + 3.6vw, 4.5rem);
+  --text-hero--line-height: 0.94;
+  --text-h2: clamp(1.75rem, 1.15rem + 2.4vw, 3.4rem);
+  --text-h2--line-height: 0.98;
+  --text-h3: clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem);
+  --text-h3--line-height: 1.1;
+  --text-lead: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  --text-lead--line-height: 1.6;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --header-h: 4.25rem;
+  --mobile-bar-h: 4.75rem;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 0.5rem);
+    -webkit-text-size-adjust: 100%;
+    interpolate-size: allow-keywords;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  @media (max-width: 1023.98px) {
+    html {
+      scroll-padding-bottom: calc(var(--mobile-bar-h) + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (max-height: 480px) and (orientation: landscape) {
+    :root {
+      --header-h: 3.25rem;
+      --text-hero: clamp(1.8rem, 1.1rem + 2.6vw, 2.6rem);
+    }
+    html {
+      scroll-padding-bottom: 0;
+    }
+  }
+
+  body {
+    position: relative;
+    background-color: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 3px;
+  }
+
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :where(section, main, article)[tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
+@layer components {
+  /* Títulos: Archivo larga e pesada, em caixa alta */
+  .display {
+    font-weight: 800;
+    font-stretch: 125%;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  /* Em telas estreitas a largura diminui para "ADESTRAMENTO" caber numa linha */
+  @media (max-width: 479.98px) {
+    .display {
+      font-stretch: 110%;
+    }
+  }
+  @media (max-width: 359.98px) {
+    .display {
+      font-stretch: 100%;
+    }
+  }
+
+  /* Bloco diagonal (assinatura visual, inspirado no corte do hero) */
+  .diag-right {
+    clip-path: polygon(28% 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .diag-left {
+    clip-path: polygon(0 0, 100% 0, 72% 100%, 0 100%);
+  }
+
+  .accordion::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 0.3s var(--ease-soft),
+      content-visibility 0.3s allow-discrete;
+  }
+  .accordion[open]::details-content {
+    block-size: auto;
+  }
+  .accordion[open] .accordion-icon {
+    rotate: 45deg;
+  }
+}
+
+/*
+  Botões em telas estreitas (≤ 380px) e baixas (celular deitado): menos largura e espaçamento,
+  para o rótulo caber numa linha. Fora de camada de propósito: vence os utilitários do Tailwind.
+*/
+@media (max-width: 380px), (max-height: 480px) and (orientation: landscape) {
+  .btn {
+    padding-inline: 0.9rem;
+    font-stretch: 100%;
+    letter-spacing: 0.02em;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(6%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    animation: rise 0.8s var(--ease-soft) both;
+    animation-delay: calc(var(--i, 0) * 100ms + 80ms);
+  }
+  /* Só transform: não atrasa o LCP */
+  .hero-figure {
+    animation: slide-in 1.1s var(--ease-soft) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .accordion::details-content {
+    transition: none;
+  }
+}
