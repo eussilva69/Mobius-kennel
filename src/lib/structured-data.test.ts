@@ -26,17 +26,43 @@ describe("lib/structured-data", () => {
     expect(address).toBeDefined();
     expect(address?.addressLocality).toBe("Arujá");
     expect(address?.addressRegion).toBe("SP");
+    expect(address?.postalCode).toBe("07400-000");
 
+    expect(business?.hasMap).toBeDefined();
+    expect(business?.geo).toBeDefined();
     expect(business?.areaServed).toBeDefined();
+
+    const areaList = business?.areaServed as Array<Record<string, unknown>>;
+    const geoCircle = areaList.find((a) => a["@type"] === "GeoCircle");
+    expect(geoCircle).toBeDefined();
+    expect(geoCircle?.geoRadius).toBe(50000);
+
+    const sameAs = business?.sameAs as string[];
+    expect(sameAs).toContain("https://www.wikidata.org/wiki/Q38782");
     expect(business?.openingHoursSpecification).toBeDefined();
   });
 
-  it("inclui Service com catálogo de ofertas de adestramento", () => {
-    const service = graph.find((item) => item["@type"] === "Service");
-    expect(service).toBeDefined();
-    expect(service?.name).toBe("Adestramento canino em domicílio");
-    expect(service?.provider).toBeDefined();
-    expect(service?.hasOfferCatalog || service?.offers).toBeDefined();
+  it("inclui Service com catálogo de ofertas de adestramento e serviços especializados", () => {
+    const services = graph.filter((item) => item["@type"] === "Service");
+    expect(services.length).toBeGreaterThanOrEqual(4);
+
+    const mainService = services.find((s) => s["@id"]?.toString().endsWith("#servico"));
+    expect(mainService).toBeDefined();
+    expect(mainService?.name).toBe("Adestramento canino em domicílio");
+    expect(mainService?.provider).toBeDefined();
+    expect(mainService?.hasOfferCatalog || mainService?.offers).toBeDefined();
+
+    const obediencia = services.find((s) => s["@id"]?.toString().endsWith("#servico-obediencia"));
+    expect(obediencia).toBeDefined();
+    expect(obediencia?.name).toContain("Obediência");
+
+    const passeio = services.find((s) => s["@id"]?.toString().endsWith("#servico-passeio"));
+    expect(passeio).toBeDefined();
+    expect(passeio?.name).toContain("Passeio");
+
+    const comportamento = services.find((s) => s["@id"]?.toString().endsWith("#servico-comportamento"));
+    expect(comportamento).toBeDefined();
+    expect(comportamento?.name).toContain("Comportamento");
   });
 
   it("inclui WebSite e FAQPage válidos", () => {

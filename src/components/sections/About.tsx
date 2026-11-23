@@ -32,6 +32,9 @@ export function About() {
               calçada, na hora da visita.
             </p>
             <p>Além de treinar o cão, orientamos a família para o treino continuar depois da aula.</p>
+            <p className="text-base text-ink-muted/90">
+              Atendimento em Arujá e municípios vizinhos do Alto Tietê (Santa Isabel, Mogi das Cruzes, Guarulhos, Itaquaquecetuba, Poá e Suzano).
+            </p>
           </div>
           <p className="display mt-8 flex items-center gap-3 text-[0.95rem] tracking-[0.04em]">
             <span aria-hidden="true" className="h-0.5 w-8 bg-gold" />

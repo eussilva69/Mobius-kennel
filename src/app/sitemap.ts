@@ -12,7 +12,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 1.0,
-      images: [`${base}/images/morbius/og/og-morbius-kennel.jpg`],
+      images: [
+        `${base}/images/morbius/og/og-morbius-kennel.jpg`,
+        `${base}/images/morbius/hero/adestrador-e-cao-recorte.webp`,
+        `${base}/images/morbius/hero/adestrador-dois-caes-recorte.webp`,
+        `${base}/images/morbius/treinamentos/obediencia-cao-sentado.webp`,
+        `${base}/images/morbius/treinamentos/passeio-na-guia.webp`,
+        `${base}/images/morbius/treinamentos/comportamento-rottweiler-maltes.webp`,
+        `${base}/images/morbius/profissionais/adestrador-com-cao.webp`,
+        `${base}/images/morbius/brand/logo-emblem.png`,
+      ],
     },
     {
       url: `${base}/politica-de-privacidade`,

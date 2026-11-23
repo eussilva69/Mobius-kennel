@@ -4,32 +4,35 @@ import { site } from "@/data/site";
 import { siteDescription, siteTitle } from "./seo";
 import { getSiteUrl } from "./site-url";
 
-/** Cidades atendidas na região de Arujá e Alto Tietê / Grande SP */
-const servedCities = [
-  "Arujá",
-  "Santa Isabel",
-  "Mogi das Cruzes",
-  "Guarulhos",
-  "Itaquaquecetuba",
-  "Suzano",
-  "Poá",
-  "São Paulo",
-];
 
 /**
  * Dados estruturados (schema.org) completos e interligados via @graph.
- * Configurados estritamente com informações e localização confirmadas.
+ * Configurados estritamente com informações e localização confirmadas,
+ * enriquecidos com GEO-targeting, entidades Wikidata e serviços individuais.
  */
 export function buildStructuredData() {
   const url = getSiteUrl().origin;
   const id = (fragment: string) => `${url}/#${fragment}`;
   const prices = plans.map((p) => p.monthlyPrice);
 
-  const areaServed = servedCities.map((city) => ({
+  const cityEntities = site.location.servedCities.map((city) => ({
     "@type": "City",
-    name: city,
+    name: city.name,
+    sameAs: `https://www.wikidata.org/wiki/${city.wikidataId}`,
     containedInPlace: { "@type": "State", name: site.location.stateName },
   }));
+
+  const geoCircle = {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: site.location.latitude,
+      longitude: site.location.longitude,
+    },
+    geoRadius: site.location.radiusKm * 1000,
+  };
+
+  const areaServed = [...cityEntities, geoCircle];
 
   const business = {
     "@type": ["LocalBusiness", "ProfessionalService"],
@@ -42,7 +45,12 @@ export function buildStructuredData() {
     telephone: site.whatsapp.e164,
     image: `${url}/images/morbius/og/og-morbius-kennel.jpg`,
     logo: `${url}/images/morbius/brand/logo-emblem.png`,
-    sameAs: [site.instagram.url],
+    hasMap: site.location.mapsUrl,
+    sameAs: [
+      site.instagram.url,
+      "https://www.wikidata.org/wiki/Q38782", // Adestramento de cães (Dog Training)
+      "https://www.wikidata.org/wiki/Q2982880", // Comportamento canino (Dog Behavior)
+    ],
     priceRange: `R$ ${Math.min(...prices)} a R$ ${Math.max(...prices)} por mês`,
     currenciesAccepted: "BRL",
     paymentAccepted: "PIX, Cartão de Crédito",
@@ -50,12 +58,13 @@ export function buildStructuredData() {
       "@type": "PostalAddress",
       addressLocality: site.location.city,
       addressRegion: site.location.state,
+      postalCode: site.location.postalCode,
       addressCountry: site.location.country,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: -23.3967,
-      longitude: -46.3203,
+      latitude: site.location.latitude,
+      longitude: site.location.longitude,
     },
     areaServed,
     openingHoursSpecification: [
@@ -72,13 +81,30 @@ export function buildStructuredData() {
       contactType: "customer service",
       availableLanguage: ["Portuguese"],
     },
+    potentialAction: {
+      "@type": "CommunicateAction",
+      target: [
+        {
+          "@type": "EntryPoint",
+          urlTemplate: `https://wa.me/${site.whatsapp.number}`,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+          ],
+        },
+      ],
+    },
     knowsAbout: [
       "Adestramento canino em domicílio",
-      "Obediência canina básica e avançada",
-      "Modificação de comportamento canino",
-      "Socialização de filhotes",
+      "Adestramento de cães em Arujá e Alto Tietê",
+      "Comandos básicos de obediência (senta, fica, vem, junto)",
+      "Obediência canina avançada",
       "Passeio estruturado sem puxar a guia",
-      "Tratamento de ansiedade e reatividade em cães",
+      "Modificação de comportamento e controle de reatividade",
+      "Tratamento de ansiedade por separação e agitação canina",
+      "Socialização de filhotes e cães adultos",
+      "Prevenção de destruição de móveis e objetos",
+      "Educação sanitária e limites dentro de casa",
     ],
   };
 
@@ -98,7 +124,7 @@ export function buildStructuredData() {
     },
   }));
 
-  const service = {
+  const mainService = {
     "@type": "Service",
     "@id": id("servico"),
     name: "Adestramento canino em domicílio",
@@ -106,13 +132,49 @@ export function buildStructuredData() {
     provider: { "@id": id("empresa") },
     areaServed,
     description:
-      "Aulas práticas de adestramento canino realizadas diretamente no domicílio do cliente em Arujá e região: comandos fundamentais, obediência avançada, passeio sem puxar e orientação familiar.",
+      "Aulas práticas de adestramento canino realizadas diretamente no domicílio do cliente em Arujá, Santa Isabel, Mogi das Cruzes e região: comandos fundamentais, obediência avançada, passeio sem puxar e orientação familiar.",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Planos de Adestramento Morbius Kennel",
       itemListElement: offers,
     },
     offers,
+  };
+
+  const obedienciaService = {
+    "@type": "Service",
+    "@id": id("servico-obediencia"),
+    name: "Obediência Canina Básica e Avançada em Domicílio",
+    serviceType: "Obediência Canina",
+    provider: { "@id": id("empresa") },
+    areaServed,
+    description:
+      "Treinamento prático de comandos de controle e foco (senta, fica, vem, junto) na rotina da casa, com a família orientada para manter os resultados.",
+    url: `${url}/#servicos`,
+  };
+
+  const passeioService = {
+    "@type": "Service",
+    "@id": id("servico-passeio"),
+    name: "Treinamento de Passeio Estruturado sem Puxar a Guia",
+    serviceType: "Passeio na Guia",
+    provider: { "@id": id("empresa") },
+    areaServed,
+    description:
+      "Treino prático na rua e calçada para o cão caminhar ao lado do tutor sem tracionar a guia e sem avançar em outros cães, pessoas ou veículos.",
+    url: `${url}/#servicos`,
+  };
+
+  const comportamentoService = {
+    "@type": "Service",
+    "@id": id("servico-comportamento"),
+    name: "Modificação de Comportamento e Reatividade Canina",
+    serviceType: "Comportamento Canino",
+    provider: { "@id": id("empresa") },
+    areaServed,
+    description:
+      "Solução para cães reativos, ansiosos, com latidos excessivos, receio de visitas ou destruição de objetos no ambiente doméstico.",
+    url: `${url}/#servicos`,
   };
 
   const website = {
@@ -147,6 +209,10 @@ export function buildStructuredData() {
     isPartOf: { "@id": id("site") },
     about: { "@id": id("empresa") },
     breadcrumb: { "@id": id("breadcrumb") },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["#hero-title", "#sobre-title", "#servicos-title", "#duvidas"],
+    },
   };
 
   const faqPage = {
@@ -161,7 +227,17 @@ export function buildStructuredData() {
 
   return {
     "@context": "https://schema.org",
-    "@graph": [business, service, website, webpage, breadcrumb, faqPage],
+    "@graph": [
+      business,
+      mainService,
+      obedienciaService,
+      passeioService,
+      comportamentoService,
+      website,
+      webpage,
+      breadcrumb,
+      faqPage,
+    ],
   };
 }
 

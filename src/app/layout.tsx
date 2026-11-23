@@ -64,9 +64,13 @@ export const metadata: Metadata = {
   },
   other: {
     "geo.region": "BR-SP",
-    "geo.placename": "Arujá",
-    "geo.position": "-23.3967;-46.3203",
-    ICBM: "-23.3967, -46.3203",
+    "geo.placename": "Arujá, Alto Tietê, São Paulo, Brasil",
+    "geo.position": `${site.location.latitude};${site.location.longitude}`,
+    ICBM: `${site.location.latitude}, ${site.location.longitude}`,
+    "DC.title": siteTitle,
+    "DC.creator": site.name,
+    "DC.coverage": "Arujá, Santa Isabel, Mogi das Cruzes, Guarulhos, Itaquaquecetuba, Poá, Suzano, Alto Tietê, SP, Brasil",
+    "DC.subject": "Adestramento canino em domicílio, comportamento animal, obediência e passeio",
   },
 };
 
