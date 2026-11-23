@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: site.name,
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   other: {
     "geo.region": "BR-SP",
     "geo.placename": "Arujá, Alto Tietê, São Paulo, Brasil",

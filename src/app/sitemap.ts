@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site-url";
 
 /** Atualize a data quando o conteúdo da página mudar de forma relevante. */
-const CONTENT_UPDATED_AT = "2026-11-21";
+const CONTENT_UPDATED_AT = "2026-11-23";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl().origin;
