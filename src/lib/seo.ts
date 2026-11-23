@@ -17,12 +17,17 @@ export const ogImage = {
 };
 
 export const seoKeywords = [
-  // Marca e termos institucionais
+  // Marca, variações de digitação e nomes alternativos
   "Morbius Kennel",
   "Morbius Kennel adestramento",
   "Morbius Kennel Arujá",
+  "Mobius Kennel",
+  "Mobius Kennel adestramento",
+  "Canil Morbius",
+  "Canil Morbius Arujá",
+  "adestrador Morbius",
 
-  // Localização / GEO Alto Tietê e Grande SP
+  // Localização / GEO Alto Tietê, Grande SP e Condomínios de Arujá
   "adestramento de cães em Arujá",
   "adestrador de cães em Arujá SP",
   "adestramento canino Arujá e região",
@@ -36,6 +41,21 @@ export const seoKeywords = [
   "adestrador de cães Suzano",
   "adestrador de cães Poá",
   "adestramento canino Alto Tietê",
+  "adestrador condomínio Arujá 5",
+  "adestrador condomínio Arujá Hills",
+  "adestrador Arujazinho",
+  "adestrador condomínio Real Park Arujá",
+
+  // Termos populares, leigos e correlacionados
+  "adestrador de cachorros",
+  "adestramento de cachorro",
+  "adestrador de cachoro",
+  "treinador de cães em Arujá",
+  "treinador de cachorros",
+  "educador canino Arujá",
+  "educador canino particular",
+  "comportamentalista canino Arujá",
+  "especialista em comportamento canino",
 
   // Serviços e modalidades
   "adestramento canino em domicílio",
@@ -49,18 +69,31 @@ export const seoKeywords = [
   "adestramento de filhotes em domicílio",
   "socialização de filhotes e cães",
 
-  // Dores e buscas correlacionadas de alta intenção
+  // Dores e buscas sintomáticas (como as pessoas realmente pesquisam)
   "como fazer cachorro parar de puxar a guia",
   "cachorro puxando a guia no passeio",
   "passeio estruturado sem puxar a guia",
   "cachorro late para outros cães na rua",
   "cão reativo com pessoas e outros animais",
+  "como fazer cachorro parar de pular nas visitas",
+  "cachorro mordendo a mão de brincadeira como parar",
+  "filhote fazendo xixi e cocô no lugar errado",
   "ansiedade de separação canina adestrador",
   "cachorro destruindo móveis quando fica sozinho",
+  "cachorro comendo fezes coprofagia adestramento",
+  "cachorro rosnando por comida posse de recursos",
   "adestramento para cão agitado",
   "cão desobediente dentro de casa",
   "adestrador de cães perto de mim",
   "quanto custa adestramento de cães Arujá",
+
+  // Raças populares atendidas
+  "adestramento de pastor alemão Arujá",
+  "adestramento de rottweiler Arujá",
+  "adestramento de pitbull Arujá",
+  "adestramento de golden retriever Arujá",
+  "adestramento de border collie SP",
+  "adestramento de spitz alemão lulu da pomerânia",
 ] as const;
 
 /**

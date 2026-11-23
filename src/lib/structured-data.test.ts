@@ -20,6 +20,8 @@ describe("lib/structured-data", () => {
 
     expect(business).toBeDefined();
     expect(business?.name).toBe("Morbius Kennel");
+    expect(business?.alternateName).toBeDefined();
+    expect(business?.alternateName).toContain("Mobius Kennel");
     expect(business?.telephone).toBe("+5511920425303");
 
     const address = business?.address as Record<string, unknown> | undefined;
