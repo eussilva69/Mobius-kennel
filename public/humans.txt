@@ -1,0 +1,14 @@
+/* TEAM */
+Adestrador & Fundador: Morbius Kennel
+Localização: Arujá, São Paulo, Brasil
+Atendimento: Domiciliar em Arujá e Região (Alto Tietê e Grande SP)
+Site Oficial: https://www.morbiuskennel.com.br
+Instagram: https://www.instagram.com/morbius.kennel/
+WhatsApp: +55 (11) 92042-5303
+
+/* SITE */
+Standards: HTML5, CSS3, ECMAScript 2024, Schema.org
+Framework: Next.js 15, React 19, Tailwind CSS, TypeScript
+Deploy & Hosting: Vercel Edge Network
+Language: Português do Brasil (pt-BR)
+Doctype: HTML5

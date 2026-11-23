@@ -136,6 +136,7 @@ export function buildStructuredData() {
     serviceType: "Adestramento e Comportamento Canino",
     provider: { "@id": id("empresa") },
     areaServed,
+    termsOfService: `${url}/politica-de-privacidade`,
     description:
       "Aulas práticas de adestramento canino realizadas diretamente no domicílio do cliente em Arujá, Santa Isabel, Mogi das Cruzes e região: comandos fundamentais, obediência avançada, passeio sem puxar e orientação familiar.",
     hasOfferCatalog: {
@@ -153,6 +154,7 @@ export function buildStructuredData() {
     serviceType: "Obediência Canina",
     provider: { "@id": id("empresa") },
     areaServed,
+    termsOfService: `${url}/politica-de-privacidade`,
     description:
       "Treinamento prático de comandos de controle e foco (senta, fica, vem, junto) na rotina da casa, com a família orientada para manter os resultados.",
     url: `${url}/#servicos`,
@@ -165,6 +167,7 @@ export function buildStructuredData() {
     serviceType: "Passeio na Guia",
     provider: { "@id": id("empresa") },
     areaServed,
+    termsOfService: `${url}/politica-de-privacidade`,
     description:
       "Treino prático na rua e calçada para o cão caminhar ao lado do tutor sem tracionar a guia e sem avançar em outros cães, pessoas ou veículos.",
     url: `${url}/#servicos`,
@@ -177,6 +180,7 @@ export function buildStructuredData() {
     serviceType: "Comportamento Canino",
     provider: { "@id": id("empresa") },
     areaServed,
+    termsOfService: `${url}/politica-de-privacidade`,
     description:
       "Solução para cães reativos, ansiosos, com latidos excessivos, receio de visitas ou destruição de objetos no ambiente doméstico.",
     url: `${url}/#servicos`,

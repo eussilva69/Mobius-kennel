@@ -53,6 +53,7 @@ describe("lib/structured-data", () => {
     expect(mainService?.name).toBe("Adestramento canino em domicílio");
     expect(mainService?.provider).toBeDefined();
     expect(mainService?.hasOfferCatalog || mainService?.offers).toBeDefined();
+    expect(mainService?.termsOfService).toBeDefined();
 
     const obediencia = services.find((s) => s["@id"]?.toString().endsWith("#servico-obediencia"));
     expect(obediencia).toBeDefined();

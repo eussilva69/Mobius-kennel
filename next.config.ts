@@ -10,6 +10,30 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 414, 640, 768, 1024, 1280, 1536, 1920],
     imageSizes: [48, 64, 96, 128, 256, 384],
   },
+  async redirects() {
+    return [
+      {
+        source: "/sitemap_index.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+      {
+        source: "/sitemap",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+      {
+        source: "/whatsapp",
+        destination: "https://wa.me/5511920425303",
+        permanent: false,
+      },
+      {
+        source: "/instagram",
+        destination: "https://www.instagram.com/morbius.kennel/",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

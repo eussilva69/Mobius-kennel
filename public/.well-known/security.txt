@@ -1,0 +1,5 @@
+Contact: https://wa.me/5511920425303
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: pt-br, en
+Canonical: https://www.morbiuskennel.com.br/.well-known/security.txt
+Policy: https://www.morbiuskennel.com.br/politica-de-privacidade
