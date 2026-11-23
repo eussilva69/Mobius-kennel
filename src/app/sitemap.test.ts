@@ -11,6 +11,7 @@ describe("app/sitemap", () => {
     expect(home?.lastModified).toBeDefined();
     expect(home?.changeFrequency).toBe("weekly");
     expect(home?.priority).toBe(1.0);
+    expect(home?.alternates?.languages?.["pt-BR"]).toBeDefined();
     expect(home?.images && home.images.length >= 6).toBe(true);
 
     const privacy = items.find((i) => i.url.includes("politica-de-privacidade"));

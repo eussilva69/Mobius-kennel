@@ -10,11 +10,38 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
       {
-        userAgent: ["Googlebot", "Bingbot", "Applebot"],
+        // Principais buscadores da web e indexação de imagens
+        userAgent: [
+          "Googlebot",
+          "Googlebot-Image",
+          "Bingbot",
+          "Applebot",
+          "DuckDuckBot",
+          "YandexBot",
+        ],
         allow: "/",
       },
       {
-        userAgent: ["GPTBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot", "Google-Extended"],
+        // Crawlers de pré-visualização em redes sociais e apps de mensagens
+        userAgent: [
+          "facebookexternalhit",
+          "Facebot",
+          "Twitterbot",
+          "WhatsApp",
+          "LinkedInBot",
+        ],
+        allow: "/",
+      },
+      {
+        // Motores de busca por IA e assistentes conversacionais (AI Overviews)
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "ClaudeBot",
+          "Google-Extended",
+          "Amazonbot",
+        ],
         allow: "/",
       },
     ],

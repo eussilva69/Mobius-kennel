@@ -12,5 +12,7 @@ describe("app/manifest", () => {
     expect(config.theme_color).toBe("#0e0e0d");
     expect(config.icons).toBeDefined();
     expect(config.icons?.length).toBeGreaterThan(0);
+    expect(config.categories).toContain("pets");
+    expect(config.shortcuts && config.shortcuts.length >= 2).toBe(true);
   });
 });

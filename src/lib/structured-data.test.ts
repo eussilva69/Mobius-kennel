@@ -31,6 +31,8 @@ describe("lib/structured-data", () => {
     expect(business?.hasMap).toBeDefined();
     expect(business?.geo).toBeDefined();
     expect(business?.areaServed).toBeDefined();
+    expect(business?.serviceArea).toBeDefined();
+    expect(business?.isAccessibleForFree).toBe(false);
 
     const areaList = business?.areaServed as Array<Record<string, unknown>>;
     const geoCircle = areaList.find((a) => a["@type"] === "GeoCircle");

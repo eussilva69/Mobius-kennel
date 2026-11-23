@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 1.0,
+      alternates: {
+        languages: {
+          "pt-BR": `${base}/`,
+          "x-default": `${base}/`,
+        },
+      },
       images: [
         `${base}/images/morbius/og/og-morbius-kennel.jpg`,
         `${base}/images/morbius/hero/adestrador-e-cao-recorte.webp`,
@@ -28,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.3,
+      alternates: {
+        languages: {
+          "pt-BR": `${base}/politica-de-privacidade`,
+          "x-default": `${base}/politica-de-privacidade`,
+        },
+      },
     },
   ];
 }

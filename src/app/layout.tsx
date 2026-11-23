@@ -74,6 +74,9 @@ export const metadata: Metadata = {
     "DC.creator": site.name,
     "DC.coverage": "Arujá, Santa Isabel, Mogi das Cruzes, Guarulhos, Itaquaquecetuba, Poá, Suzano, Alto Tietê, SP, Brasil",
     "DC.subject": "Adestramento canino em domicílio, comportamento animal, obediência e passeio",
+    "DC.language": "pt-BR",
+    "DC.format": "text/html",
+    "DC.type": "Service",
   },
 };
 

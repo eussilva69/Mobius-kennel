@@ -67,6 +67,9 @@ export function buildStructuredData() {
       longitude: site.location.longitude,
     },
     areaServed,
+    serviceArea: geoCircle,
+    isAccessibleForFree: false,
+    knowsLanguage: ["pt-BR", "Portuguese"],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -115,6 +118,8 @@ export function buildStructuredData() {
     price: p.monthlyPrice,
     priceCurrency: "BRL",
     availability: "https://schema.org/InStock",
+    url: `${url}/#planos`,
+    seller: { "@id": id("empresa") },
     priceSpecification: {
       "@type": "UnitPriceSpecification",
       price: p.monthlyPrice,
@@ -206,6 +211,9 @@ export function buildStructuredData() {
     name: siteTitle,
     description: siteDescription,
     inLanguage: "pt-BR",
+    primaryImageOfPage: `${url}/images/morbius/og/og-morbius-kennel.jpg`,
+    datePublished: "2026-11-21",
+    dateModified: "2026-11-23",
     isPartOf: { "@id": id("site") },
     about: { "@id": id("empresa") },
     breadcrumb: { "@id": id("breadcrumb") },
